@@ -1,0 +1,32 @@
+.slide-style {
+    width: fit-content;
+}
+
+.slide-style:first-child {
+    margin-left: 20px;
+}
+
+.slide-style:last-child {
+    margin-right: 20px;
+}
+
+.slide-style .card-category {
+    width: fit-content;
+    margin: 20px 5px;
+    cursor: pointer;
+}
+
+.slide-style .card-category .img-category {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.slide-style .card-category .title {
+    font-size: var(--font-size-medium);
+    color: var(--ion-color-dark);
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 0;
+}

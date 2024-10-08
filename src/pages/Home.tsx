@@ -1,25 +1,28 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonPage } from '@ionic/react';
 import './Home.css';
+import Header from '../components/Header/Header';
+import Search from '../components/Search/Search';
+import CategoriesSwiper from '../components/CategorySwiper/CategorySwiper';
+import ProductList from '../components/ProductList/ProductList';
+import { useState } from 'react';
 
 const Home: React.FC = () => {
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
-  );
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const handleSearch = (term: string) => {
+        setSearchTerm(term);
+    };
+
+    return (
+        <IonPage>
+            <Header title="home" />
+            <IonContent fullscreen>
+                <Search onSearch={handleSearch} />
+                <CategoriesSwiper />
+                <ProductList searchTerm={searchTerm} />
+            </IonContent>
+        </IonPage>
+    );
 };
 
 export default Home;

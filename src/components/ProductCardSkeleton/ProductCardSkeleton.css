@@ -1,0 +1,29 @@
+.card-skeleton {
+    height: 380px;
+    border-radius: 8px;
+}
+.card-skeleton .skeleton-imagen {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+    margin: 0;
+}
+
+.card-skeleton .skeleton-title {
+    width: 60%;
+    height: 10px;
+    margin: 20px 10px 10px;
+    border-radius: 10px;
+}
+
+.card-skeleton .contain-description {
+    padding: 0;
+}
+
+.card-skeleton .skeleton-description {
+    width: 90%;
+    height: 10px;
+    margin: 5px auto;
+    border-radius: 10px;
+}

@@ -1,0 +1,43 @@
+.search-section {
+    background-image: url(/src/assets/images/shopping-search.webp);
+    height: 300px;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    padding-top: 50px;
+    align-content: end;
+    box-shadow: inset 0px -20px 20px 200px rgba(0, 0, 0, 0.5);
+    transform: translateY(-50px);
+}
+
+.search-section .contain-search {
+    transform: translateY(50%);
+    width: 650px;
+    max-width: 90%;
+    margin: auto;
+}
+
+.search-section .contain-search .search {
+    --box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    --background: var(--ion-background-color);
+    --color: var(--ion-color-dark);
+    --placeholder-color: var(--ion-color-medium);
+    --icon-color: var(--ion-color-dark);
+    --clear-button-color: var(--ion-color-dark);
+    --border-radius: 8px;
+}
+
+.searchbar-input.sc-ion-searchbar-ios {
+    min-height: 64px;
+    --cancel-button-color: #19422d;
+    padding-inline-start: 60px !important;
+}
+
+.searchbar-search-icon.sc-ion-searchbar-ios {
+    margin-inline-start: 20px !important;
+}
+
+.searchbar-clear-button.sc-ion-searchbar-ios {
+    inset-inline-end: 20px !important;
+}

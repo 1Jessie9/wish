@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'wish',
-  webDir: 'dist'
+    appId: 'com.yesscodes.wish',
+    appName: 'wish',
+    webDir: 'dist'
 };
 
 export default config;

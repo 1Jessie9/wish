@@ -1,0 +1,14 @@
+.favorites .grid-style {
+    width: 1200px;
+    max-width: 90%;
+    margin: 0 auto 0;
+}
+
+.favorites .contain-select {
+    width: 300px;
+    max-width: 90%;
+    margin: auto;
+    margin-top: 30px;
+    background-color: var(--ion-background-color);
+    --border-radius: 8px;
+}

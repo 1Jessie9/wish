@@ -1,0 +1,28 @@
+.header-style {
+    box-shadow: none;
+}
+
+.toolbar-style {
+    padding: 10px 10px !important;
+    border-radius: 0 0 25px 25px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.toolbar-style .logo {
+    display: block;
+    text-align: center;
+}
+
+.toolbar-style .logo .icon-logo {
+    object-fit: contain;
+    width: 75px;
+}
+
+.toolbar-style .icon-heart {
+    font-size: 30px;
+}
+
+.toolbar-style .title-text {
+    color: var(--ion-color-light);
+}
