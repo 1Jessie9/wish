@@ -35,16 +35,19 @@ const ProductList: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
                     )}
                 </IonRow>
             </IonGrid>
-            <IonInfiniteScroll
-                threshold="20%"
-                disabled={!hasMore}
-                onIonInfinite={(ev) => {
-                    setOffset((prev) => prev + 12);
-                    setTimeout(() => ev.target.complete(), 500);
-                }}
-            >
-                <IonInfiniteScrollContent loadingText="Cargando más productos..."></IonInfiniteScrollContent>
-            </IonInfiniteScroll>
+            {hasMore &&
+                (
+                    <IonInfiniteScroll
+                        threshold="20%"
+                        onIonInfinite={(ev) => {
+                            setOffset((prev) => prev + 12);
+                            setTimeout(() => ev.target.complete(), 500);
+                        }}
+                    >
+                        <IonInfiniteScrollContent loadingText="Cargando más productos..."></IonInfiniteScrollContent>
+                    </IonInfiniteScroll>
+                )
+            }
         </section>
     );
 };
