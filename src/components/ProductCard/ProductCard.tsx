@@ -1,51 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import {
-    IonCard,
-    IonCardTitle,
-    IonCardContent,
-    IonIcon,
-} from '@ionic/react';
+import { IonCard, IonCardTitle, IonCardContent, IonIcon } from '@ionic/react';
 import { heart, heartOutline } from 'ionicons/icons';
 import { IProduct } from '../../models/Product.interface';
-import { useStorage } from '../../hooks/useStorage';
+import { useFavorites } from '../../context/FavoriteContext';
 import './ProductCard.css';
 
 interface ProductCardProps {
     product: IProduct;
-    isFavorite?: boolean;
+    forceFavorite?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, forceFavorite }) => {
     const maxLength = 80;
-    const { setFavorite, removeFavorite, getFavorites } = useStorage();
+    const { favorites, addFavorite, deleteFavorite } = useFavorites();
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
     useEffect(() => {
-        const checkFavorite = async () => {
-            const favorites = await getFavorites();
-            const favoriteIds = favorites.map((item: IProduct) => item.id);
-            setIsFavorite(favoriteIds.includes(product.id));
-        };
-        checkFavorite();
-    }, [getFavorites, product.id]);
+        setIsFavorite(favorites.some((item) => item.id === product.id));
+    }, [favorites, product.id]);
 
     const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
         event.currentTarget.src = 'src/assets/images/not-found.webp'; // Ruta de la imagen de respuesta
     };
 
-    const toggleFavorite = async () => {
+    const toggleFavorite = () => {
         if (isFavorite) {
-            await removeFavorite(product.id);
+            deleteFavorite(product.id);
         } else {
-            await setFavorite(product);
+            addFavorite(product);
         }
-        setIsFavorite(!isFavorite);
     };
 
     return (
         <IonCard className="product-card">
             <IonIcon
-                icon={isFavorite ? heart : heartOutline}
+                icon={isFavorite || forceFavorite ? heart : heartOutline}
                 color={isFavorite ? 'secondary' : 'medium'}
                 className="icon-heart"
                 onClick={toggleFavorite}

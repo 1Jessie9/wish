@@ -23,25 +23,28 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import './styles/styles.css';
 import Favorites from './pages/Favorites/Favorites';
+import { FavoriteProvider } from './context/FavoriteContext';
 
 setupIonicReact();
 
 const App: React.FC = () => (
-    <IonApp>
-        <IonReactRouter>
-            <IonRouterOutlet>
-                <Route exact path="/home">
-                    <Home />
-                </Route>
-                <Route exact path="/favorites">
-                    <Favorites />
-                </Route>
-                <Route exact path="/">
-                    <Redirect to="/home" />
-                </Route>
-            </IonRouterOutlet>
-        </IonReactRouter>
-    </IonApp>
+    <FavoriteProvider>
+        <IonApp>
+            <IonReactRouter>
+                <IonRouterOutlet>
+                    <Route exact path="/home">
+                        <Home />
+                    </Route>
+                    <Route exact path="/favorites">
+                        <Favorites />
+                    </Route>
+                    <Route exact path="/">
+                        <Redirect to="/home" />
+                    </Route>
+                </IonRouterOutlet>
+            </IonReactRouter>
+        </IonApp>
+    </FavoriteProvider>
 );
 
 export default App;

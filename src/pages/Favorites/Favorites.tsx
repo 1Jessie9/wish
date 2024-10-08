@@ -1,50 +1,36 @@
 import { IonPage, IonContent, IonGrid, IonRow, IonCol, IonItem, IonSelect, IonSelectOption } from '@ionic/react';
-import { useEffect, useState } from 'react';
-import { IProduct } from '../../models/Product.interface';
-import { useStorage } from '../../hooks/useStorage';
+import { useState } from 'react';
+import { useFavorites } from '../../context/FavoriteContext';
 import './Favorites.css';
 import Header from '../../components/Header/Header';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
 const Favorites: React.FC<{ title?: string }> = () => {
-    const { getFavorites, store } = useStorage(); // Asegúrate de obtener store aquí
-    const [favorites, setFavorites] = useState<IProduct[]>([]);
-    const [sortOrder, setSortOrder] = useState<string>(''); // Estado para la ordenación
+    const { favorites } = useFavorites();
+    const [sortOrder, setSortOrder] = useState<string>('');
 
-    // Cargar los productos favoritos al montar el componente
-    useEffect(() => {
-        const fetchFavorites = async () => {
-            if (store) { // Asegúrate de que store esté inicializado
-                const favoriteProducts = await getFavorites();
-                setFavorites(favoriteProducts);
-            }
-        };
-        fetchFavorites();
-    }, [store]); // Solo se ejecuta cuando store cambia
-
-    // Función para ordenar los productos favoritos directamente antes de renderizar
     const getSortedFavorites = () => {
-        let sorted = [...favorites]; // Clonar el array de favoritos
+        let sorted = [...favorites];
 
         switch (sortOrder) {
             case 'nameAsc':
-                return sorted.sort((a, b) => a.title.localeCompare(b.title)); // A-Z
+                return sorted.sort((a, b) => a.title.localeCompare(b.title));
             case 'nameDesc':
-                return sorted.sort((a, b) => b.title.localeCompare(a.title)); // Z-A
+                return sorted.sort((a, b) => b.title.localeCompare(a.title));
             case 'dateAsc':
-                return sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()); // Más viejo
+                return sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
             case 'dateDesc':
-                return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); // Más reciente
+                return sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
             case 'priceAsc':
-                return sorted.sort((a, b) => a.price - b.price); // Menor a mayor
+                return sorted.sort((a, b) => a.price - b.price);
             case 'priceDesc':
-                return sorted.sort((a, b) => b.price - a.price); // Mayor a menor
+                return sorted.sort((a, b) => b.price - a.price);
             default:
-                return favorites; // Si no se selecciona orden, devolver favoritos tal como están
+                return favorites;
         }
     };
 
-    const sortedFavorites = getSortedFavorites(); // Obtener los favoritos ordenados justo antes de renderizar
+    const sortedFavorites = getSortedFavorites();
 
     return (
         <IonPage className='favorites'>
@@ -54,7 +40,7 @@ const Favorites: React.FC<{ title?: string }> = () => {
                     fill="outline"
                     value={sortOrder}
                     placeholder="Order by:"
-                    onIonChange={(e) => setSortOrder(e.detail.value)} // Actualiza sortOrder
+                    onIonChange={(e) => setSortOrder(e.detail.value)}
                 >
                     <IonSelectOption value="nameAsc">Nombre A-Z</IonSelectOption>
                     <IonSelectOption value="nameDesc">Nombre Z-A</IonSelectOption>
@@ -71,7 +57,7 @@ const Favorites: React.FC<{ title?: string }> = () => {
                         ) : (
                             sortedFavorites.map((product) => (
                                 <IonCol key={product.id} size-xs="12" size-sm="12" size-md="4" size-lg="3" size-xl="3">
-                                    <ProductCard product={product} />
+                                    <ProductCard product={product} forceFavorite={true}/>
                                 </IonCol>
                             ))
                         )}
